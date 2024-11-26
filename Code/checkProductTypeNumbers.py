@@ -11,4 +11,5 @@ print("Unique Product Categories and Counts:")
 print(unique_categories)
 
 total_unique_categories = df[category_column].nunique()
+
 print(f"\nTotal number of unique product categories: {total_unique_categories}")
