@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
 # Step 1: Load the CSV file
-df = pd.read_csv('C:\\Users\\Admin\\Desktop\\Moodify\\AmazonProductReviewsDataset.csv\\7817_1.csv')
+df = pd.read_csv('C:\\Users\Admin\\Desktop\\Amazon-Product-Reviews - Amazon Product Review (1).csv')
 
 # Step 2: Handle missing data
 # Check for missing values
@@ -29,19 +29,20 @@ df.drop_duplicates(inplace=True)
 
 # Step 5: Clean text data (if applicable)
 def clean_text(text):
+    text = str(text)
     # You can perform operations such as removing special characters, converting to lowercase, etc.
     text = text.lower()  # Convert to lowercase
     text = ''.join(e for e in text if e.isalnum() or e.isspace())  # Remove non-alphanumeric characters
     return text
 
 # Apply text cleaning to a 'review_text' column
-df['cleaned_review'] = df['reviews.text'].apply(clean_text)
+df['cleaned_review'] = df['review_body'].apply(clean_text)
 
 # Step 6: Encoding categorical variables (if necessary)
 # Example: Encoding a categorical column (e.g., 'category' column)
 # Label Encoding
 label_encoder = LabelEncoder()
-df['category_encoded'] = label_encoder.fit_transform(df['categories'])
+df['category_encoded'] = label_encoder.fit_transform(df['product_category'])
 
 # Or One-hot encoding (for non-ordinal categories)
 # df = pd.get_dummies(df, columns=['category_column'])
