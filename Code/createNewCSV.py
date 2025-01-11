@@ -1,4 +1,5 @@
 import csv
+import chardet
 
 # Define the input and output file paths
 input_file = 'C:\\Moodify\\cleaned_data.csv'
@@ -7,8 +8,12 @@ output_file = 'C:\\Moodify\\sorted_data.csv'
 # Specify the columns to copy (0-indexed positions)
 columns_to_copy = [5, 6, 7, 12, 13]  # Example: copying the 1st and 3rd columns
 rating_column_index = 7   # Example: 4th column in the original CSV (0-indexed)
+with open(input_file, 'rb') as file:
+    raw_data = file.read()
+    result = chardet.detect(raw_data)
+    encoding = result['encoding']
 
-with open(input_file, mode='r') as infile, open(output_file, mode='w', newline='') as outfile:
+with open(input_file, mode='r', encoding = encoding, errors='replace') as infile, open(output_file, mode='w', newline='', errors='replace') as outfile:
     reader = csv.reader(infile)
     writer = csv.writer(outfile)
 
