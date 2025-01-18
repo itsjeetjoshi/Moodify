@@ -15,7 +15,7 @@ def preprocess_text(text):
     return text
 
 # Predict new reviews
-new_reviews = ["bad", "The service was terrible.", "The app is badly amazing", "The app is really good", "the app was fine, not the best place though"]
+new_reviews = ["Five Stars for this being the worst product"]
 new_reviews_cleaned = [preprocess_text(review) for review in new_reviews]
 new_reviews_vectorized = loaded_vectorizer.transform(new_reviews_cleaned)
 predictions = loaded_model.predict(new_reviews_vectorized)
