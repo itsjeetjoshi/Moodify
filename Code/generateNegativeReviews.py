@@ -3,113 +3,128 @@ import csv
 import random
 
 # Templates for negative reviews with placeholders
-negative_review_templates = [
-    "The {product} is {adjective}, completely {adjective2}.",
-    "Worst {experience} ever, not worth the {money}.",
-    "It {broke} after {time}, really {adjective}.",
-    "Terrible {aspect}, do not {recommend}.",
-    "Customer service was {adjective} and {adjective2}.",
-    "The description is {adjective}, it's nothing like {advertised}.",
-    "Completely {adjective} with this purchase.",
-    "Shipping was {adjective}, and the {product} arrived {damaged}.",
-    "A total {waste} of money, {avoid} at all costs.",
-    "It doesn't {work} as expected, very {adjective}.",
-    "The {item} was {defective}, had to return it {immediately}.",
-    "Horrible {experience}, I'll never buy this {brand} again.",
-    "The {material} feels {adjective} and {flimsy}.",
-    "Performance is {adjective}, absolutely {adjective2}.",
-    "It stopped {working} after {time}, not {reliable}.",
-    "Overpriced and {underdelivered}, very {adjective}.",
-    "The size is completely {wrong}, not true to {description}.",
-    "Packaging was {adjective}, the {item} came {scratched}.",
-    "Does not {meet expectations}, very {adjective}.",
-    "Not worth the {hype}, extremely {adjective}."
+neutral_review_templates = [
+    "The {product} is {adjective}, nothing too {adjective2}.",
+    "An {average} {experience}, neither {good} nor {bad}.",
+    "It {works} as expected, but {nothing_special}.",
+    "Decent {aspect}, but could be {better}.",
+    "Customer service was {adjective}, took {time} to resolve.",
+    "The description is {mostly_accurate}, but some details were {off}.",
+    "An {okay} purchase, but {some_issues}.",
+    "Shipping was {adjective}, and the {product} arrived {fine}.",
+    "A {fair} product for the {price}, but {not_excellent}.",
+    "It does {what_it_says}, but {lacks_features}.",
+    "The {item} was {functional}, but had {minor_issues}.",
+    "A {decent} {experience}, nothing {remarkable}.",
+    "The {material} feels {adjective}, but {sturdy}.",
+    "Performance is {adjective}, but not {outstanding}.",
+    "It {lasted} {longer_than_expected}, but {not_perfect}.",
+    "Reasonably priced, but {could_be_better}.",
+    "The size is {close} to {description}, but {slightly_off}.",
+    "Packaging was {adjective}, the {item} came {intact}.",
+    "Meets {basic_expectations}, but {could_improve}.",
+    "Worth considering if you need a {functional} {product}."
 ]
 
 # Templates for negative headings
-negative_heading_templates = [
+neutral_heading_templates = [
     "{adjective} {product}",
-    "Completely {adjective2}",
-    "Terrible {aspect}",
-    "Worst {experience} Ever",
-    "Not Worth the {money}",
-    "Extremely {adjective}",
-    "Poor {aspect}",
-    "Defective {item}",
-    "{adjective2} {product}",
-    "{adjective} and {adjective2}",
-    "Never Buy This {brand}",
-    "{adjective} Quality",
-    "Broken After {time}",
-    "Highly {adjective}",
-    "A Total {waste}",
+    "An {average} {experience}",
+    "{adjective2}, But Not {amazing}",
+    "{decent} Quality",
+    "{reasonable} for the {price}",
+    "Not {bad}, Not {great}",
+    "{functional} {item}",
+    "{mostly_accurate} Description",
+    "{fair} Deal",
+    "{adjective} Performance",
     "{adjective} Packaging",
-    "{adjective} Experience",
-    "Low {aspect} Standards",
-    "Avoid This {product}",
-    "Overpriced and {adjective}"
+    "A {neutral} {experience}",
+    "Satisfactory {aspect}",
+    "{decent}, But {nothing_special}",
+    "Works, But Could Be {better}",
+    "{reliable}, But Not {outstanding}",
+    "Close to {expectations}",
+    "{fine}, But {lacks_features}",
+    "Mediocre {product}",
+    "Average {performance}"
 ]
 
 # Possible values for placeholders
 placeholders = {
     "product": ["item", "product", "purchase", "device", "order"],
-    "adjective": ["terrible", "awful", "disappointing", "horrible", "bad"],
-    "adjective2": ["useless", "frustrating", "low quality", "subpar", "misleading"],
+    "adjective": ["decent", "okay", "fair", "satisfactory", "reasonable"],
+    "adjective2": ["acceptable", "average", "mediocre", "fine", "not bad"],
     "experience": ["experience", "purchase", "decision", "choice"],
-    "money": ["money", "effort", "time"],
-    "broke": ["broke", "failed", "stopped working"],
-    "time": ["one use", "a week", "a day", "a month"],
+    "good": ["good", "great", "amazing"],
+    "bad": ["bad", "disappointing", "underwhelming"],
+    "works": ["works", "functions", "operates"],
+    "nothing_special": ["nothing special", "nothing remarkable", "nothing extraordinary"],
     "aspect": ["quality", "experience", "design", "service"],
-    "recommend": ["recommend", "suggest", "trust"],
-    "damaged": ["damaged", "broken", "scratched"],
-    "waste": ["waste", "loss", "mistake"],
-    "avoid": ["avoid", "stay away", "do not buy"],
-    "work": ["work", "function", "perform"],
+    "better": ["better", "improved", "enhanced"],
+    "time": ["some time", "a few days", "a week"],
+    "mostly_accurate": ["mostly accurate", "fairly accurate", "somewhat true"],
+    "off": ["off", "inaccurate", "slightly misleading"],
+    "okay": ["okay", "fine", "passable"],
+    "some_issues": ["some issues", "minor flaws", "slight concerns"],
+    "fine": ["fine", "undamaged", "acceptable"],
+    "fair": ["fair", "reasonable", "justifiable"],
+    "price": ["price", "cost", "value"],
+    "not_excellent": ["not excellent", "not outstanding", "not impressive"],
+    "what_it_says": ["what it says", "what’s advertised", "the job"],
+    "lacks_features": ["lacks features", "is basic", "could use more options"],
     "item": ["item", "product", "device", "order"],
-    "defective": ["defective", "broken", "non-functional"],
-    "immediately": ["immediately", "right away", "within days"],
-    "brand": ["brand", "company", "seller"],
+    "functional": ["functional", "usable", "working"],
+    "minor_issues": ["minor issues", "small defects", "cosmetic problems"],
+    "remarkable": ["remarkable", "exceptional", "memorable"],
     "material": ["material", "build", "construction"],
-    "working": ["working", "functioning", "performing"],
-    "reliable": ["reliable", "durable", "trustworthy"],
-    "underdelivered": ["underdelivered", "underperformed", "fell short"],
-    "wrong": ["wrong", "inaccurate", "off"],
+    "sturdy": ["sturdy", "durable", "solid"],
+    "outstanding": ["outstanding", "exceptional", "remarkable"],
+    "lasted": ["lasted", "held up", "remained functional"],
+    "longer_than_expected": ["longer than expected", "as expected", "decently long"],
+    "not_perfect": ["not perfect", "has flaws", "could improve"],
+    "could_be_better": ["could be better", "could improve", "needs enhancement"],
+    "close": ["close", "similar", "almost identical"],
     "description": ["description", "advertisement", "listing"],
-    "scratched": ["scratched", "damaged", "marred"],
-    "meet expectations": ["meet expectations", "live up to the hype", "satisfy requirements"],
-    "hype": ["hype", "expectations", "promise"],
-    "advertised": ["advertised", "described", "promised"],
-    "flimsy": ["flimsy", "weak", "delicate"],
-    "working": ["working", "functioning", "performing"]
+    "slightly_off": ["slightly off", "a bit inaccurate", "not precise"],
+    "intact": ["intact", "undamaged", "in good condition"],
+    "basic_expectations": ["basic expectations", "minimum requirements", "the essentials"],
+    "could_improve": ["could improve", "needs work", "could be refined"],
+    "functional": ["functional", "practical", "useful"],
+    "neutral": ["neutral", "balanced", "fair"],
+    "reliable": ["reliable", "consistent", "dependable"],
+    "expectations": ["expectations", "standards", "advertised claims"],
+    "fine": ["fine", "acceptable", "decent"],
+    "decent": ["decent", "average", "not bad"],
+    "average": ["decent", "average",],
+    "great": ["good", "great"],
+    "amazing": ["amazing", "great"],
+    "performance": ["performance"],
+    "reasonable": ["reasonable"]
 }
 
 unique_reviews = set()
-while len(unique_reviews) < 1000:
-    template = random.choice(negative_review_templates)
+while len(unique_reviews) < 100:
+    template = random.choice(neutral_review_templates)
     review = template.format(**{key: random.choice(values) for key, values in placeholders.items()})
     unique_reviews.add(review)
 
 unique_headings = set()
-while len(unique_headings) < 1000:
-    template = random.choice(negative_heading_templates)
+while len(unique_headings) < 100:
+    template = random.choice(neutral_heading_templates)
     heading = template.format(**{key: random.choice(values) for key, values in placeholders.items()})
     unique_headings.add(heading)
 
 data_to_append = []
 for review, heading in zip(unique_reviews, unique_headings):
-    data_to_append.append([random.randint(1,3), heading, review, 0])
+    data_to_append.append(['Fire HD 7, 7" HD Display, Wi-Fi, 8 GB', 'PC', 3, heading, review, 0])
 
-# Define CSV file path (ensure this file exists and has the correct columns)
 csv_file_path = 'sorted_data.csv'
 
-# Append data to the CSV file
 with open(csv_file_path, 'a', newline='', encoding='utf-8') as csvfile:
     csv_writer = csv.writer(csvfile)
     
-    # If the CSV file is empty or doesn't have headers, write the header first (adjust column names)
-    if csvfile.tell() == 0:  # File is empty
-        csv_writer.writerow(['star_rating', 'review_headline', 'review_body', 'Sentiment'])  # Adjust column names
-    
-    # Write the new rows of data
+    if csvfile.tell() == 0:
+        csv_writer.writerow(['product_title', 'product_category', 'star_rating', 'review_headline', 'review_body', 'Sentiment'])
     csv_writer.writerows(data_to_append)
 print("Data appended to sorted_data.csv")
