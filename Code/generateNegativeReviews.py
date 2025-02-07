@@ -2,7 +2,6 @@ import random
 import csv
 import random
 
-# Templates for negative reviews with placeholders
 neutral_review_templates = [
     "The {product} is {adjective}, nothing too {adjective2}.",
     "An {average} {experience}, neither {good} nor {bad}.",
@@ -26,7 +25,6 @@ neutral_review_templates = [
     "Worth considering if you need a {functional} {product}."
 ]
 
-# Templates for negative headings
 neutral_heading_templates = [
     "{adjective} {product}",
     "An {average} {experience}",
@@ -50,7 +48,6 @@ neutral_heading_templates = [
     "Average {performance}"
 ]
 
-# Possible values for placeholders
 placeholders = {
     "product": ["item", "product", "purchase", "device", "order"],
     "adjective": ["decent", "okay", "fair", "satisfactory", "reasonable"],
